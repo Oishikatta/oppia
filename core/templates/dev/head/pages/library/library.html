@@ -78,13 +78,30 @@
         </div>
 
         <div class="oppia-exp-summary-tiles-container" ng-if="pageMode === LIBRARY_PAGE_MODES.INDEX">
+          <div class="row">
+            <div ng-if="libraryWindowIsNarrow">
+              <background-banner></background-banner>
+              <style type="text/css">
+                div.oppia-library-container > div > div > div > div > div:nth-child(1) > background-banner > div { margin-left: 10px; z-index: -1; }
+                .oppia-exp-summary-tiles-container { padding-top: 10px; }
+                .oppia-exp-summary-tiles-container div.row + div.row { background: #F2F3EE; margin-bottom: 15px; }
+                @media (max-width: 450px) {
+                  .oppia-library-h2 { font-size: 0.8em; }
+                  exploration-summary-tile { zoom: 0.76; }
+                  md-card { margin-right: 10px; }
+                }
+              </style>
+            </div>
+
           <img ng-src="<[bannerImageFileUrl]>" align="center"
                width="100%">
           <div style="text-align: center; width: 100%;">
             <h1 class="oppia-library-h1" translate="I18N_LIBRARY_MAIN_HEADER"></h1>
             <h2 class="oppia-library-h2" translate="I18N_LIBRARY_SUB_HEADER"></h2>
           </div>
+          </div>
 
+          <div class="row">
           <div ng-if="libraryGroups.length === 0"
                style="margin: 150px auto; text-align: center; width: 100%;"
                translate="I18N_LIBRARY_NO_EXPLORATION_GROUPS">
@@ -103,7 +120,7 @@
             </div>
 
             <!-- TODO(sll): Add card at end of the row that, when clicked, does showFullResultsPage(group.categories)" -->
-            <div ng-if="!libraryWindowIsNarrow">
+            <div ng-if="true || !libraryWindowIsNarrow">
               <md-button class="md-no-ink oppia-library-carousel-scroller"
                          ng-click="scroll($index, true)"
                          ng-hide="leftmostCardIndices[$index] == 0">
@@ -153,7 +170,7 @@
                    ng-if="(group.activity_summary_dicts.length - tileDisplayCount) <= leftmostCardIndices[$index]"></div>
             </div>
 
-            <div ng-if="libraryWindowIsNarrow && leftmostCardIndices">
+            <div ng-if="false && libraryWindowIsNarrow && leftmostCardIndices">
               <md-button class="md-no-ink oppia-library-carousel-scroller"
                          ng-click="decrementLeftmostCardIndex($index)"
                          ng-hide="leftmostCardIndices[$index] == 0">
@@ -197,6 +214,7 @@
                    ng-if="(group.activity_summary_dicts.length - tileDisplayCount) <= leftmostCardIndices[$index]">
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
